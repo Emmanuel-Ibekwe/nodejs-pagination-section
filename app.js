@@ -36,11 +36,11 @@ console.log(process.env.NODE_ENV);
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
-  collection: "sessions",
-  connectionOptions: {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  }
+  collection: "sessions"
+  // connectionOptions: {
+  //   useNewUrlParser: true,
+  //   useUnifiedTopology: true
+  // }
 });
 
 const csrfProtection = csrf();
@@ -151,6 +151,7 @@ app.use((error, req, res, next) => {
 
 mongoose
   .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
+  // .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(result => {
     app.listen(process.env.PORT || 3000);
     // https
