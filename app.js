@@ -24,10 +24,10 @@ const User = require("./models/user");
 
 const MONGODB_URI = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.5aiiow7.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`;
 
-const options = {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-};
+// const options = {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// };
 
 console.log(MONGODB_URI);
 
@@ -146,7 +146,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI, options)
+  .connect(MONGODB_URI)
   .then(result => {
     app.listen(process.env.PORT || 3000);
     // https
