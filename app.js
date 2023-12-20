@@ -29,6 +29,8 @@ const options = {
   useUnifiedTopology: true
 };
 
+console.log(MONGODB_URI);
+
 console.log(process.env.NODE_ENV);
 
 const app = express();
