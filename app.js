@@ -36,13 +36,17 @@ console.log(process.env.NODE_ENV);
 const app = express();
 const store = new MongoDBStore({
   uri: MONGODB_URI,
-  collection: "sessions"
+  collection: "sessions",
+  connectionOptions: {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  }
 });
 
 const csrfProtection = csrf();
 
-const privateKey = fs.readFileSync("server.key");
-const certificate = fs.readFileSync("server.cert");
+// const privateKey = fs.readFileSync("server.key");
+// const certificate = fs.readFileSync("server.cert");
 
 const fileStorage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -146,7 +150,7 @@ app.use((error, req, res, next) => {
 });
 
 mongoose
-  .connect(MONGODB_URI)
+  .connect(MONGODB_URI, { useUnifiedTopology: true, useNewUrlParser: true })
   .then(result => {
     app.listen(process.env.PORT || 3000);
     // https
